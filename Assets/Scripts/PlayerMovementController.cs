@@ -13,6 +13,9 @@ public class PlayerMovementController : MonoBehaviour {
     public Animator Wheels1; //Animator State Machine
     public Animator Wheels2;
 
+    public Animator HookShot1;
+    public Animator HookShot2;
+
     public float accel;
     public float rotateSpeed;
 
@@ -72,6 +75,10 @@ public class PlayerMovementController : MonoBehaviour {
         {
             ASM1.SetTrigger("Spin");
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            HookShot1.SetTrigger("ActivateHook");
+        }
         if (Input.GetKey(KeyCode.W))
         {
             P1RB.AddRelativeForce(transform.forward * accel, ForceMode.Impulse);
@@ -108,6 +115,10 @@ public class PlayerMovementController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.RightControl))
         {
             ASM2.SetTrigger("Spin");
+        }
+        if (Input.GetKeyDown(KeyCode.RightShift))
+        {
+            HookShot2.SetTrigger("ActivateHook");
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
