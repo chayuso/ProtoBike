@@ -16,8 +16,10 @@ public class PlayerMovementController : MonoBehaviour {
     public Animator HookShot1;
     public Animator HookShot2;
 
-    public float accel;
+    public float Player1Accel;
+	public float Player2Accel;
     public float rotateSpeed;
+
 
     public bool left1 = false;
     public bool right1 = false;
@@ -81,7 +83,7 @@ public class PlayerMovementController : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.W))
         {
-            P1RB.AddRelativeForce(transform.forward * accel, ForceMode.Impulse);
+			P1RB.AddRelativeForce(transform.forward * Player1Accel, ForceMode.Impulse);
         }
         
         if (Input.GetKey(KeyCode.A))
@@ -108,7 +110,7 @@ public class PlayerMovementController : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.S))
         {
-            P1RB.AddRelativeForce(-transform.forward * accel, ForceMode.Impulse);
+			P1RB.AddRelativeForce(-transform.forward * Player1Accel, ForceMode.Impulse);
         }
         
 
@@ -123,7 +125,7 @@ public class PlayerMovementController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            P2RB.AddRelativeForce(transform.forward * accel, ForceMode.Impulse);
+			P2RB.AddRelativeForce(transform.forward * Player2Accel, ForceMode.Impulse);
         }
         
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -152,7 +154,7 @@ public class PlayerMovementController : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            P2RB.AddRelativeForce(-transform.forward * accel, ForceMode.Impulse);
+			P2RB.AddRelativeForce(-transform.forward * Player2Accel, ForceMode.Impulse);
         }
         
     }
