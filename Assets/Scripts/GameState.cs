@@ -52,9 +52,6 @@ public class GameState : MonoBehaviour {
     public Vector3 lastPlayer1Position;
     public Vector3 lastPlayer2Position;
 
-	public float Player1GoalDist;
-	public float Player2GoalDist;
-
     // Use this for initialization
     void Start () {
         TimeRemainingText.enabled = false;
