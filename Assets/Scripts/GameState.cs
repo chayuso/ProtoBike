@@ -7,6 +7,8 @@ public class GameState : MonoBehaviour {
     public GameObject Player1;
     public GameObject Player2;
 
+    public GameObject[] ItemBlocks = new GameObject[] { };
+
     public GameObject StartButton;
     public GameObject ResumeButton;
     public GameObject MenuButton;
@@ -208,6 +210,11 @@ public class GameState : MonoBehaviour {
         Controls.GetComponent<PlayerMovementController>().right2 = false;
         Controls.GetComponent<PlayerMovementController>().left1 = false;
         Controls.GetComponent<PlayerMovementController>().left2 = false;
+        for (int i = 0; i < ItemBlocks.Length; ++i)
+        {
+            ItemBlocks[i].GetComponent<MeshRenderer>().enabled = true;
+            ItemBlocks[i].GetComponent<BoxCollider>().enabled = true;
+        }
     }
 
 }
