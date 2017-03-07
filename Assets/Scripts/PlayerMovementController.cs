@@ -33,6 +33,49 @@ public class PlayerMovementController : MonoBehaviour {
     private Rigidbody P1RB;
     private Rigidbody P2RB;
 
+    bool spin1 = false;
+    bool spin2 = false;
+    bool spinanimating1 = false;
+    bool spinanimating2 = false;
+
+    bool hookshot1 = false;
+    bool hookshot2 = false;
+    bool hookshotanimating1 = false;
+    bool hookshotanimating2 = false;
+
+    double deadspace = .005;
+
+    public double xbox_taxis1;
+    public double xbox_dhaxis1;
+    public double xbox_dvaxis1;
+    public double xbox_hAxis1;
+    public double xbox_vAxis1;
+    public bool xbox_a1;
+    public bool xbox_b1;
+    public bool xbox_x1;
+    public bool xbox_y1;
+    public bool xbox_lb1;
+    public bool xbox_rb1;
+    public bool xbox_ls1;
+    public bool xbox_rs1;
+    public bool xbox_back1;
+    public bool xbox_start1;
+
+    public double xbox_taxis2;
+    public double xbox_dhaxis2;
+    public double xbox_dvaxis2;
+    public double xbox_hAxis2;
+    public double xbox_vAxis2;
+    public bool xbox_a2;
+    public bool xbox_b2;
+    public bool xbox_x2;
+    public bool xbox_y2;
+    public bool xbox_lb2;
+    public bool xbox_rb2;
+    public bool xbox_ls2;
+    public bool xbox_rs2;
+    public bool xbox_back2;
+    public bool xbox_start2;
     // Use this for initialization
     void Start () {
         P1RB = Player1.GetComponent<Rigidbody>();
@@ -51,111 +94,184 @@ public class PlayerMovementController : MonoBehaviour {
         Wheels2.SetBool("Accelerate", accel2);
         Wheels1.SetBool("Reverse", reverse1);
         Wheels2.SetBool("Reverse", reverse2);
+        //names                                      //+value = left trigger
+        xbox_taxis1 = Input.GetAxis("Xbox1Trigger"); //-value = right trigger
+        xbox_dhaxis1 = Input.GetAxis("Xbox1DpadHorizontal");
+        xbox_dvaxis1 = Input.GetAxis("Xbox1DpadVertical");
+        xbox_hAxis1 = Input.GetAxis("Xbox1LeftStickHorizontal");
+        xbox_vAxis1 = Input.GetAxis("Xbox1LeftStickVertical");
+        xbox_a1 = Input.GetButton("Xbox1A");
+        xbox_b1 = Input.GetButton("Xbox1B");
+        xbox_x1 = Input.GetButtonDown("Xbox1X");
+        xbox_y1 = Input.GetButtonDown("Xbox1Y");
+        xbox_lb1 = Input.GetButtonDown("Xbox1LB");
+        xbox_rb1 = Input.GetButtonDown("Xbox1RB");
+        xbox_ls1 = Input.GetButtonDown("Xbox1LeftStickButton");
+        xbox_rs1 = Input.GetButtonDown("Xbox1RightStickButton");
+        xbox_back1 = Input.GetButtonDown("Xbox1Back");
+        xbox_start1 = Input.GetButtonDown("Xbox1Start");
+
+        xbox_taxis2 = Input.GetAxis("Xbox2Trigger"); //-value = right trigger
+        xbox_dhaxis2 = Input.GetAxis("Xbox2DpadHorizontal");
+        xbox_dvaxis2 = Input.GetAxis("Xbox2DpadVertical");
+        xbox_hAxis2 = Input.GetAxis("Xbox2LeftStickHorizontal");
+        xbox_vAxis2 = Input.GetAxis("Xbox2LeftStickVertical");
+        xbox_a2 = Input.GetButton("Xbox2A");
+        xbox_b2 = Input.GetButton("Xbox2B");
+        xbox_x2 = Input.GetButtonDown("Xbox2X");
+        xbox_y2 = Input.GetButtonDown("Xbox2Y");
+        xbox_lb2 = Input.GetButtonDown("Xbox2LB");
+        xbox_rb2 = Input.GetButtonDown("Xbox2RB");
+        xbox_ls2 = Input.GetButtonDown("Xbox2LeftStickButton");
+        xbox_rs2 = Input.GetButtonDown("Xbox2RightStickButton");
+        xbox_back2 = Input.GetButtonDown("Xbox2Back");
+        xbox_start2 = Input.GetButtonDown("Xbox2Start");
+
     }
     public void WheelAnimationControls()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (xbox_a1 || xbox_taxis1 < 0 || Input.GetKey(KeyCode.W))
         {   accel1 = true; }
-        if (Input.GetKeyUp(KeyCode.W))
+        else
         {   accel1 = false;}
-        if (Input.GetKeyDown(KeyCode.S))
+        if (xbox_b1 || xbox_taxis1 > 0 || Input.GetKey(KeyCode.S))
         { reverse1 = true; }
-        if (Input.GetKeyUp(KeyCode.S))
+        else
         { reverse1 = false; }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+
+        if (xbox_a2 || xbox_taxis2 < 0 || Input.GetKey(KeyCode.UpArrow))
         { accel2 = true; }
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        else
         { accel2 = false; }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (xbox_b2 || xbox_taxis2 > 0 || Input.GetKey(KeyCode.DownArrow))
         { reverse2 = true; }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        else
         { reverse2 = false; }
     }
 
 	public void Controls () {
-        if (Input.GetKeyDown(KeyCode.E))
+        //################################################################
+        //item activations
+        if (xbox_x1 || Input.GetKeyDown(KeyCode.E))
         {
             ASM1.SetTrigger("Spin");
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (xbox_rb1 || Input.GetKeyDown(KeyCode.R))
         {
             HookShot1.SetTrigger("ActivateHook");
         }
-        if (Input.GetKey(KeyCode.W))
+        //################################################################
+        //Accelerate
+        if (xbox_a1 || Input.GetKey(KeyCode.W))
         {
 			P1RB.AddRelativeForce(transform.forward * Player1Accel, ForceMode.Impulse);
         }
-        
-        if (Input.GetKey(KeyCode.A))
+        else if (xbox_taxis1 < 0)
+        {
+            P1RB.AddRelativeForce(transform.forward * Player1Accel * (-Input.GetAxis("Xbox1Trigger")), ForceMode.Impulse);
+        }
+        //################################################################
+        //LeftTurn 
+        if (xbox_hAxis1 < 0)
+        {
+            Player1.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox1LeftStickHorizontal"), 0));
+        }
+        else if (Input.GetKey(KeyCode.A))
         {
             Player1.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
-        if (Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.D))
-        {     left1 = true; }
-        if (Input.GetKey(KeyCode.D))
+
+        if (xbox_hAxis1 < 0||(Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)))
+        { left1 = true; }
+        else
+        { left1 = false; }
+        //##################################################################
+        //RightTurn
+        if (xbox_hAxis1 > 0)
+        {
+            Player1.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox1LeftStickHorizontal"), 0));
+        }
+        else if (Input.GetKey(KeyCode.D))
         {
             Player1.transform.Rotate(new Vector3(0, rotateSpeed, 0));
         }
-        if (Input.GetKeyDown(KeyCode.D) && !Input.GetKeyDown(KeyCode.A))
-        {
-            right1 = true; 
-        }
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            left1 = false;
-        }
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            right1 = false;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-			P1RB.AddRelativeForce(-transform.forward * Player1Accel, ForceMode.Impulse);
-        }
-        
 
-        if (Input.GetKeyDown(KeyCode.RightControl))
+        if (xbox_hAxis1 > 0 || (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)))
+        { right1 = true; }
+        else
+        { right1 = false; }
+        //#################################################################
+        //Reverse/Brake
+        if (xbox_b1 || Input.GetKey(KeyCode.S))
+        {
+            P1RB.AddRelativeForce(-transform.forward * Player1Accel, ForceMode.Impulse);
+        }
+        else if (xbox_taxis1 > 0)
+        {
+            P1RB.AddRelativeForce(-transform.forward * Player1Accel * Input.GetAxis("Xbox1Trigger"), ForceMode.Impulse);
+        }
+        //=======================================================================================
+        //Player2
+        //=======================================================================================
+        //item activations
+        if (xbox_x2 || Input.GetKeyDown(KeyCode.RightControl))
         {
             ASM2.SetTrigger("Spin");
         }
-        if (Input.GetKeyDown(KeyCode.RightShift))
+        if (xbox_rb2 || Input.GetKeyDown(KeyCode.RightShift))
         {
             HookShot2.SetTrigger("ActivateHook");
         }
-
-        if (Input.GetKey(KeyCode.UpArrow))
+        //################################################################
+        //Accelerate
+        if (xbox_a2 || Input.GetKey(KeyCode.UpArrow))
         {
-			P2RB.AddRelativeForce(transform.forward * Player2Accel, ForceMode.Impulse);
+            P2RB.AddRelativeForce(transform.forward * Player2Accel, ForceMode.Impulse);
         }
-        
-        if (Input.GetKey(KeyCode.LeftArrow))
+        else if (xbox_taxis2 < 0)
+        {
+            P2RB.AddRelativeForce(transform.forward * Player2Accel * (-Input.GetAxis("Xbox2Trigger")), ForceMode.Impulse);
+        }
+        //################################################################
+        //LeftTurn 
+        if (xbox_hAxis2 < 0)
+        {
+            Player2.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox2LeftStickHorizontal"), 0));
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             Player2.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && !Input.GetKeyDown(KeyCode.RightArrow))
+
+        if (xbox_hAxis2 < 0 || (Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)))
+        { left2 = true; }
+        else
+        { left2 = false; }
+        //##################################################################
+        //RightTurn
+        if (xbox_hAxis2 > 0)
         {
-            left2 = true;
+            Player2.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox2LeftStickHorizontal"), 0));
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             Player2.transform.Rotate(new Vector3(0, rotateSpeed, 0));
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && !Input.GetKeyDown(KeyCode.LeftArrow))
+
+        if (xbox_hAxis2 > 0 || (Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow)))
+        { right2 = true; }
+        else
+        { right2 = false; }
+        //#################################################################
+        //Reverse/Brake
+        if (xbox_b2 || Input.GetKey(KeyCode.DownArrow))
         {
-            right2 = true;
+            P2RB.AddRelativeForce(-transform.forward * Player2Accel, ForceMode.Impulse);
         }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        else if (xbox_taxis2 > 0)
         {
-            left2 = false;
+            P2RB.AddRelativeForce(-transform.forward * Player2Accel * Input.GetAxis("Xbox2Trigger"), ForceMode.Impulse);
         }
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            right2 = false;
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-			P2RB.AddRelativeForce(-transform.forward * Player2Accel, ForceMode.Impulse);
-        }
-        
+        //#################################################################
     }
 }

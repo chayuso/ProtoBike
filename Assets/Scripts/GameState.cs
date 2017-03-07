@@ -81,15 +81,15 @@ public class GameState : MonoBehaviour {
                 StopAllCoroutines();
                 startedGlobalTimeCourtine = false;
             }
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("Xbox1Start") || Input.GetButtonDown("Xbox2Start") || Input.GetKeyDown(KeyCode.Space))
             {
                 ResumeButton.GetComponent<ResumeButton>().OnMouseDown();
             }
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetButtonDown("Xbox1Back") || Input.GetButtonDown("Xbox2Back") || Input.GetKeyDown(KeyCode.Return))
             {
                 MenuButton.GetComponent<MenuButton>().OnMouseDown();
             }
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetButtonDown("Xbox1LB") || Input.GetButtonDown("Xbox2LB") || Input.GetKeyDown(KeyCode.Backspace))
             {
                 RestartButton.GetComponent<RestartButton>().OnMouseDown();
             }
@@ -110,7 +110,7 @@ public class GameState : MonoBehaviour {
             EscButtonText.enabled = true;
             TimeRemainingText.enabled = true;
             TimeRemainingText.text = "Time Remaining: " + globalClock.ToString();
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetButtonDown("Xbox1Start") || Input.GetButtonDown("Xbox2Start") || Input.GetKeyDown(KeyCode.Escape))
             {
                 lastPlayer1Velocity = Player1.GetComponent<Rigidbody>().velocity;
                 lastPlayer2Velocity = Player2.GetComponent<Rigidbody>().velocity;
@@ -124,7 +124,7 @@ public class GameState : MonoBehaviour {
                 TimeRemainingText.enabled = false;
                 WinnerText.enabled = false;
             }
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetButtonDown("Xbox1LB") || Input.GetButtonDown("Xbox2LB") || Input.GetKeyDown(KeyCode.Backspace))
             {
                 RestartButton.GetComponent<RestartButton>().OnMouseDown();
             }
@@ -154,7 +154,7 @@ public class GameState : MonoBehaviour {
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("Xbox1Start") || Input.GetButtonDown("Xbox2Start") || Input.GetKeyDown(KeyCode.Space))
             {
                 StartButton.GetComponent<StartButton>().OnMouseDown();
             }
