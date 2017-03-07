@@ -6,7 +6,6 @@ public class PlayerMovementController : MonoBehaviour {
 
     public GameObject Player1;
     public GameObject Player2;
-	public GameObject Goal;
 
     public Animator ASM1; //Animator State Machine
     public Animator ASM2;
