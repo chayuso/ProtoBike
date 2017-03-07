@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 //Test commit
@@ -22,7 +23,7 @@ public class ItemBlock : MonoBehaviour {
 		transform.Rotate (new Vector3(15, 30, 45) * Time.deltaTime);
 	}
 
-    void OnCollisionEnter(Collision Player)
+    void OnTriggerEnter(Collider Player)
     {
         if (Player.gameObject.name == Player1.name)
         {
