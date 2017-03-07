@@ -6,6 +6,7 @@ public class PlayerMovementController : MonoBehaviour {
 
     public GameObject Player1;
     public GameObject Player2;
+	public GameObject Goal;
 
     public Animator ASM1; //Animator State Machine
     public Animator ASM2;
@@ -30,21 +31,7 @@ public class PlayerMovementController : MonoBehaviour {
     public bool accel2 = false;
     public bool reverse1 = false;
     public bool reverse2 = false;
-    private Rigidbody P1RB;
-    private Rigidbody P2RB;
-
-    bool spin1 = false;
-    bool spin2 = false;
-    bool spinanimating1 = false;
-    bool spinanimating2 = false;
-
-    bool hookshot1 = false;
-    bool hookshot2 = false;
-    bool hookshotanimating1 = false;
-    bool hookshotanimating2 = false;
-
-    double deadspace = .005;
-
+    
     public double xbox_taxis1;
     public double xbox_dhaxis1;
     public double xbox_dvaxis1;
@@ -76,6 +63,26 @@ public class PlayerMovementController : MonoBehaviour {
     public bool xbox_rs2;
     public bool xbox_back2;
     public bool xbox_start2;
+
+	private Rigidbody P1RB;
+	private Rigidbody P2RB;
+
+	private bool spin1 = false;
+	private bool spin2 = false;
+	private bool spinanimating1 = false;
+	private bool spinanimating2 = false;
+
+	private bool hookshot1 = false;
+	private bool hookshot2 = false;
+	private bool hookshotanimating1 = false;
+	private bool hookshotanimating2 = false;
+
+	private float p1DistToGoal;
+	private float p2DistToGoal;
+	private float playerDistance;
+
+	private double deadspace = .005;
+
     // Use this for initialization
     void Start () {
         P1RB = Player1.GetComponent<Rigidbody>();

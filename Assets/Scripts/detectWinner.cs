@@ -30,6 +30,6 @@ public class detectWinner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print(Vector3.Distance(gameObject.transform.position, Player2.transform.position));
+	
 	}
 }

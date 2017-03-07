@@ -39,12 +39,12 @@ public class ItemBlock : MonoBehaviour {
 //        }
 //    }
     void FixedUpdate(){
-		if (Vector3.Distance (transform.position, Player1.transform.position) <= .7 && blockActive) {
+		if (Vector3.Distance (transform.position, Player1.transform.position) <= 1.25 && blockActive) {
 			pManager.boostP1 = true;
 			blockActive = false;
 			gameObject.SetActive (false);
 		}
-		if (Vector3.Distance (transform.position, Player2.transform.position) <= .7 && blockActive) {
+		if (Vector3.Distance (transform.position, Player2.transform.position) <= 1.25 && blockActive) {
 			pManager.boostP2 = true;
 			blockActive = false;
 			gameObject.SetActive (false);
