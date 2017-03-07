@@ -10,6 +10,7 @@ public class ItemBlock : MonoBehaviour {
 	public GameObject Player2;
 	public GameObject PowerManager;
 
+	private bool blockActive = true;
 	private PowerManager pManager;
 
 	// Use this for initialization
@@ -22,31 +23,32 @@ public class ItemBlock : MonoBehaviour {
 		transform.Rotate (new Vector3(15, 30, 45) * Time.deltaTime);
 	}
 
-    void OnCollisionEnter(Collision Player)
-    {
-        if (Player.gameObject.name == Player1.name)
-        {
-            pManager.boostP1 = true;
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-        }
-        else if (Player.gameObject.name == Player2.name)
-        {
-            pManager.boostP2 = true;
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-        }
-    }
-    /*void FixedUpdate(){
-		if (Vector3.Distance (transform.position, Player1.transform.position) <= .7) {
+//    void OnCollisionEnter(Collision Player)
+//    {
+//        if (Player.gameObject.name == Player1.name)
+//        {
+//            pManager.boostP1 = true;
+//            gameObject.GetComponent<MeshRenderer>().enabled = false;
+//            gameObject.GetComponent<BoxCollider>().enabled = false;
+//        }
+//        else if (Player.gameObject.name == Player2.name)
+//        {
+//            pManager.boostP2 = true;
+//            gameObject.GetComponent<MeshRenderer>().enabled = false;
+//            gameObject.GetComponent<BoxCollider>().enabled = false;
+//        }
+//    }
+    void FixedUpdate(){
+		if (Vector3.Distance (transform.position, Player1.transform.position) <= .7 && blockActive) {
 			pManager.boostP1 = true;
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-        }
-		if (Vector3.Distance (transform.position, Player2.transform.position) <= .7) {
+			blockActive = false;
+			gameObject.SetActive (false);
+		}
+		if (Vector3.Distance (transform.position, Player2.transform.position) <= .7 && blockActive) {
 			pManager.boostP2 = true;
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+			blockActive = false;
+			gameObject.SetActive (false);
+
         }	
-	}*/
+	}
 }
