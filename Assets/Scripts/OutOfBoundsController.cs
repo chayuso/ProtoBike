@@ -26,6 +26,9 @@ public class OutOfBoundsController : MonoBehaviour {
 					closestSpawnPosition = spawn.transform.position;
 				}
 			}
+
+			Player1.transform.position = closestSpawnPosition;
+			Player1.transform.rotation = Quaternion.identity;
 		}
 		if (col.gameObject.name == "Player2") {
 			print ("Player 2 is out of bounds");
@@ -39,7 +42,8 @@ public class OutOfBoundsController : MonoBehaviour {
 					closestSpawnPosition = spawn.transform.position;
 				}
 			}
-
+			Player2.transform.position = closestSpawnPosition;
+			Player2.transform.rotation = Quaternion.identity;
 		}	
 	}
 	// Use this for initialization
