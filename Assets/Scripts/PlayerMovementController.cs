@@ -63,24 +63,13 @@ public class PlayerMovementController : MonoBehaviour {
     public bool xbox_back2;
     public bool xbox_start2;
 
-	private Rigidbody P1RB;
+    public float joystick_turn_modifier = 2.5f;
+    private Rigidbody P1RB;
 	private Rigidbody P2RB;
-
-	private bool spin1 = false;
-	private bool spin2 = false;
-	private bool spinanimating1 = false;
-	private bool spinanimating2 = false;
-
-	private bool hookshot1 = false;
-	private bool hookshot2 = false;
-	private bool hookshotanimating1 = false;
-	private bool hookshotanimating2 = false;
 
 	private float p1DistToGoal;
 	private float p2DistToGoal;
 	private float playerDistance;
-
-	private double deadspace = .005;
 
     // Use this for initialization
     void Start () {
@@ -180,7 +169,7 @@ public class PlayerMovementController : MonoBehaviour {
         //LeftTurn 
         if (xbox_hAxis1 < 0)
         {
-            Player1.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox1LeftStickHorizontal"), 0));
+            Player1.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox1LeftStickHorizontal")* joystick_turn_modifier, 0));
         }
         else if (Input.GetKey(KeyCode.A))
         {
@@ -195,7 +184,7 @@ public class PlayerMovementController : MonoBehaviour {
         //RightTurn
         if (xbox_hAxis1 > 0)
         {
-            Player1.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox1LeftStickHorizontal"), 0));
+            Player1.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox1LeftStickHorizontal")* joystick_turn_modifier, 0));
         }
         else if (Input.GetKey(KeyCode.D))
         {
@@ -242,7 +231,7 @@ public class PlayerMovementController : MonoBehaviour {
         //LeftTurn 
         if (xbox_hAxis2 < 0)
         {
-            Player2.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox2LeftStickHorizontal"), 0));
+            Player2.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox2LeftStickHorizontal")* joystick_turn_modifier, 0));
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -257,7 +246,7 @@ public class PlayerMovementController : MonoBehaviour {
         //RightTurn
         if (xbox_hAxis2 > 0)
         {
-            Player2.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox2LeftStickHorizontal"), 0));
+            Player2.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox2LeftStickHorizontal")*joystick_turn_modifier, 0));
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
