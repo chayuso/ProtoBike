@@ -13,7 +13,7 @@ public class CollisionTest : MonoBehaviour {
     {
         Test.text = col.gameObject.name;
     }
-    void OnCollisionEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
         Test.text = col.gameObject.name;
     }
