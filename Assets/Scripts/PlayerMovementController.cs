@@ -64,12 +64,15 @@ public class PlayerMovementController : MonoBehaviour {
     public bool xbox_start2;
 
     public float joystick_turn_modifier = 2.5f;
+    public float joystick_acceleration_modifier = 1.005f;
     private Rigidbody P1RB;
 	private Rigidbody P2RB;
 
 	private float p1DistToGoal;
 	private float p2DistToGoal;
 	private float playerDistance;
+    private string test1;
+    private string test2;
 
     // Use this for initialization
     void Start () {
@@ -163,7 +166,7 @@ public class PlayerMovementController : MonoBehaviour {
         }
         else if (xbox_taxis1 < 0)
         {
-            P1RB.AddRelativeForce(transform.forward * Player1Accel * (-Input.GetAxis("Xbox1Trigger")), ForceMode.Impulse);
+            P1RB.AddRelativeForce(transform.forward * Player1Accel * ((-Input.GetAxis("Xbox1Trigger") * joystick_acceleration_modifier)), ForceMode.Impulse);
         }
         //################################################################
         //LeftTurn 
@@ -203,7 +206,7 @@ public class PlayerMovementController : MonoBehaviour {
         }
         else if (xbox_taxis1 > 0)
         {
-            P1RB.AddRelativeForce(-transform.forward * Player1Accel * Input.GetAxis("Xbox1Trigger"), ForceMode.Impulse);
+            P1RB.AddRelativeForce(-transform.forward * Player1Accel * (Input.GetAxis("Xbox1Trigger")*joystick_acceleration_modifier), ForceMode.Impulse);
         }
         //=======================================================================================
         //Player2
@@ -225,7 +228,7 @@ public class PlayerMovementController : MonoBehaviour {
         }
         else if (xbox_taxis2 < 0)
         {
-            P2RB.AddRelativeForce(transform.forward * Player2Accel * (-Input.GetAxis("Xbox2Trigger")), ForceMode.Impulse);
+            P2RB.AddRelativeForce(transform.forward * Player2Accel * ((-Input.GetAxis("Xbox2Trigger")) * joystick_acceleration_modifier), ForceMode.Impulse);
         }
         //################################################################
         //LeftTurn 
@@ -265,7 +268,7 @@ public class PlayerMovementController : MonoBehaviour {
         }
         else if (xbox_taxis2 > 0)
         {
-            P2RB.AddRelativeForce(-transform.forward * Player2Accel * Input.GetAxis("Xbox2Trigger"), ForceMode.Impulse);
+            P2RB.AddRelativeForce(-transform.forward * Player2Accel * (Input.GetAxis("Xbox2Trigger") * joystick_acceleration_modifier), ForceMode.Impulse);
         }
         //#################################################################
     }
