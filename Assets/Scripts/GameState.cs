@@ -23,8 +23,6 @@ public class GameState : MonoBehaviour {
     public Camera MenuCamera;
     public Camera Player1Camera;
     public Camera Player2Camera;
-    public Text winText1;
-    public Text winText2;
 
     public Text EscButtonText;
     public Text TimeRemainingText;
@@ -110,6 +108,7 @@ public class GameState : MonoBehaviour {
             EscButtonText.enabled = true;
             TimeRemainingText.enabled = true;
             TimeRemainingText.text = "Time Remaining: " + globalClock.ToString();
+			print (TimeRemainingText);
             if (Input.GetButtonDown("Xbox1Start") || Input.GetButtonDown("Xbox2Start") || Input.GetKeyDown(KeyCode.Escape))
             {
                 lastPlayer1Velocity = Player1.GetComponent<Rigidbody>().velocity;
@@ -196,8 +195,6 @@ public class GameState : MonoBehaviour {
 
         PauseCamera.enabled = false;
         WinnerText.text = "";
-        winText1.enabled = false;
-        winText2.enabled = false;
         EscButtonText.enabled = false;
         TimeRemainingText.enabled = false;
         Player1.GetComponent<Rigidbody>().velocity = Vector3.zero;

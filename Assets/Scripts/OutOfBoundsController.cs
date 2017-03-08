@@ -8,6 +8,10 @@ public class OutOfBoundsController : MonoBehaviour {
 
 	public GameObject Spawn1;
 	public GameObject Spawn2;
+	public GameObject Spawn3;
+	public GameObject Spawn4;
+	public GameObject Spawn5;
+
 
 	public GameObject Player1;
 	public GameObject Player2;
@@ -15,7 +19,6 @@ public class OutOfBoundsController : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		print (col.gameObject.name);
 		if (col.gameObject.name == "Player1") {
-			print ("Player 1 is out of bounds");
 			Vector3 closestSpawnPosition = new Vector3 ();
 			float closestSpawnDist = float.MaxValue;
 
@@ -31,7 +34,6 @@ public class OutOfBoundsController : MonoBehaviour {
 			Player1.transform.rotation = Quaternion.identity;
 		}
 		if (col.gameObject.name == "Player2") {
-			print ("Player 2 is out of bounds");
 			Vector3 closestSpawnPosition = new Vector3 ();
 			float closestSpawnDist = float.MaxValue;
 
@@ -50,5 +52,9 @@ public class OutOfBoundsController : MonoBehaviour {
 	void Start () {
 		spawnList.Add(Spawn1);
 		spawnList.Add(Spawn2);
+		spawnList.Add(Spawn3);
+		spawnList.Add(Spawn4);
+		spawnList.Add(Spawn5);
+
 	}
 }
