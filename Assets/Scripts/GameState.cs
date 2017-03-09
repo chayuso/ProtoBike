@@ -14,6 +14,8 @@ public class GameState : MonoBehaviour {
     public GameObject MenuButton;
     public GameObject RestartButton;
 
+    public GameObject PowerManager;
+
     Vector3 startpos1;
     Vector3 startpos2;
     Quaternion startrot1;
@@ -207,6 +209,10 @@ public class GameState : MonoBehaviour {
         Controls.GetComponent<PlayerMovementController>().right2 = false;
         Controls.GetComponent<PlayerMovementController>().left1 = false;
         Controls.GetComponent<PlayerMovementController>().left2 = false;
+        PowerManager.GetComponent<PowerManager>().p1CurrentPower = "None";
+        PowerManager.GetComponent<PowerManager>().p2CurrentPower = "None";
+        PowerManager.GetComponent<PowerManager>().boostP1 = false;
+        PowerManager.GetComponent<PowerManager>().boostP2 = false;
         for (int i = 0; i < ItemBlocks.Length; ++i)
         {
             ItemBlocks[i].GetComponent<MeshRenderer>().enabled = true;

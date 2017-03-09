@@ -65,6 +65,7 @@ public class PlayerMovementController : MonoBehaviour {
 
     public float joystick_turn_modifier = 2.5f;
     public float joystick_acceleration_modifier = 1.005f;
+    public float brake_modifier = 2;
     private Rigidbody P1RB;
 	private Rigidbody P2RB;
 
@@ -202,11 +203,11 @@ public class PlayerMovementController : MonoBehaviour {
         //Reverse/Brake
         if (xbox_b1 || Input.GetKey(KeyCode.S))
         {
-            P1RB.AddRelativeForce(-transform.forward * Player1Accel, ForceMode.Impulse);
+            P1RB.AddRelativeForce(-transform.forward * Player1Accel * brake_modifier, ForceMode.Impulse);
         }
         else if (xbox_taxis1 > 0)
         {
-            P1RB.AddRelativeForce(-transform.forward * Player1Accel * (Input.GetAxis("Xbox1Trigger")*joystick_acceleration_modifier), ForceMode.Impulse);
+            P1RB.AddRelativeForce(-transform.forward * Player1Accel * (Input.GetAxis("Xbox1Trigger")*joystick_acceleration_modifier)* brake_modifier, ForceMode.Impulse);
         }
         //=======================================================================================
         //Player2
@@ -264,11 +265,11 @@ public class PlayerMovementController : MonoBehaviour {
         //Reverse/Brake
         if (xbox_b2 || Input.GetKey(KeyCode.DownArrow))
         {
-            P2RB.AddRelativeForce(-transform.forward * Player2Accel, ForceMode.Impulse);
+            P2RB.AddRelativeForce(-transform.forward * Player2Accel*brake_modifier, ForceMode.Impulse);
         }
         else if (xbox_taxis2 > 0)
         {
-            P2RB.AddRelativeForce(-transform.forward * Player2Accel * (Input.GetAxis("Xbox2Trigger") * joystick_acceleration_modifier), ForceMode.Impulse);
+            P2RB.AddRelativeForce(-transform.forward * Player2Accel * (Input.GetAxis("Xbox2Trigger") * joystick_acceleration_modifier)* brake_modifier, ForceMode.Impulse);
         }
         //#################################################################
     }

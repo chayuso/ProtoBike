@@ -33,7 +33,7 @@ public class PowerManager : MonoBehaviour {
 
 		if (boostP1 && boostTimeP1 > 0) {
 			boostTimeP1 -= Time.deltaTime;
-			pMovement.Player1Accel = defaultAccel + 0.5f;
+			pMovement.Player1Accel = defaultAccel + 0.25f;
 		} else {
 			boostP1 = false;
 			boostTimeP1 = 2.5f;
@@ -42,7 +42,7 @@ public class PowerManager : MonoBehaviour {
 		
 		if (boostP2 && boostTimeP2 > 0) {
 			boostTimeP2 -= Time.deltaTime;
-			pMovement.Player2Accel = defaultAccel + 0.5f;
+			pMovement.Player2Accel = defaultAccel + 0.25f;
 		} else {
 			boostP2 = false;
 			boostTimeP2 = 2.5f;
