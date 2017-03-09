@@ -10,17 +10,27 @@ public class PowerManager : MonoBehaviour {
 	public float boostTimeP1 = 2.5f;
 	public float boostTimeP2 = 2.5f;
 
+	public string p1CurrentPower = "None";
+	public string p2CurrentPower = "None";
+
 	private float defaultAccel;
 
 	private PlayerMovementController pMovement;
-	// Use this for initialization
 	void Start () {
 		pMovement = PlayerMovement.GetComponent<PlayerMovementController> ();
 		defaultAccel = pMovement.Player1Accel;
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
+		//Probably shold use a switch for the powers because
+		if (p1CurrentPower == "Boost") {
+			boostP1 = true;
+		}
+
+		if (p2CurrentPower == "Boost") {
+			boostP2 = true;
+		}
+
 		if (boostP1 && boostTimeP1 > 0) {
 			boostTimeP1 -= Time.deltaTime;
 			pMovement.Player1Accel = defaultAccel + 0.5f;

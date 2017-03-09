@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OutOfBoundsController : MonoBehaviour {
-	List<GameObject> spawnList = new List<GameObject>();
+	private List<GameObject> spawnList = new List<GameObject>();
 
 	public GameObject Spawn1;
 	public GameObject Spawn2;
