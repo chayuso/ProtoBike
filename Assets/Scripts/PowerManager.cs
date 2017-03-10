@@ -25,29 +25,33 @@ public class PowerManager : MonoBehaviour {
 	public string p1CurrentPower = "None";
 	public string p2CurrentPower = "None";
 
-	private float defaultAccel;
+	private float defaultAccel; 
 
-	private PlayerMovementController pMovement;
+    private PlayerMovementController pMovement;
+
 	void Start () {
-		pMovement = PlayerMovement.GetComponent<PlayerMovementController> ();
+        pMovement = PlayerMovement.GetComponent<PlayerMovementController> ();
 		defaultAccel = pMovement.Player1Accel;
 	}
-	
-	void FixedUpdate () {
-		//Boost Controller P1
-		if (p1CurrentPower == "Boost")
-			boostP1 = true;
 
-		if (boostP1 && startBoostP1 && boostTimeP1 > 0) {
-			boostTimeP1 -= Time.deltaTime;
-			pMovement.Player1Accel = defaultAccel + 0.25f;
-		} else {
-			boostP1 = false;
-			startBoostP1 = false;
-			boostTimeP1 = 2.5f;
-			pMovement.Player1Accel = defaultAccel;
-			p1CurrentPower = "None";
-		}
+    void FixedUpdate () {
+        //Boost Controller P1
+        if (p1CurrentPower == "Boost")
+        {
+            boostP1 = true;
+        }
+
+        if (startBoostP1 && boostTimeP1 > 0)
+        {
+            boostTimeP1 -= Time.deltaTime;
+            pMovement.Player1Accel = defaultAccel + 0.25f;
+        }
+        else
+        {
+            startBoostP1 = false;
+            boostTimeP1 = 2.5f;
+            pMovement.Player1Accel = defaultAccel;
+        }
 
 		//Hookshot Controller P1
 		if (p1CurrentPower == "Hookshot")

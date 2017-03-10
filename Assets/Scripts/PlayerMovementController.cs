@@ -14,7 +14,7 @@ public class PlayerMovementController : MonoBehaviour {
     public Animator Wheels1; //Animator State Machine
     public Animator Wheels2;
 
-    public Animator HookShot1;
+    public Animator HookShot1; //Animator State Machine
     public Animator HookShot2;
 
     public float Player1Accel;

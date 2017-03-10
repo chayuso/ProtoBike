@@ -54,6 +54,8 @@ public class GameState : MonoBehaviour {
     public Vector3 lastPlayer1Position;
     public Vector3 lastPlayer2Position;
 
+    private float lastP1ClockTime;
+    private float lastP2ClockTime;
     // Use this for initialization
     void Start () {
         TimeRemainingText.enabled = false;
@@ -74,6 +76,8 @@ public class GameState : MonoBehaviour {
 	void Update () {
         if (PauseGame)
         {
+            PowerManager.GetComponent<PowerManager>().boostTimeP1 = lastP1ClockTime;
+            PowerManager.GetComponent<PowerManager>().boostTimeP2 = lastP2ClockTime;
             Player1.transform.position = lastPlayer1Position;
             Player2.transform.position = lastPlayer2Position;
             if (startedGlobalTimeCourtine) //If the Timer was started.
@@ -113,6 +117,8 @@ public class GameState : MonoBehaviour {
 			print (TimeRemainingText);
             if (Input.GetButtonDown("Xbox1Start") || Input.GetButtonDown("Xbox2Start") || Input.GetKeyDown(KeyCode.Escape))
             {
+                lastP1ClockTime = PowerManager.GetComponent<PowerManager>().boostTimeP1;
+                lastP2ClockTime = PowerManager.GetComponent<PowerManager>().boostTimeP2;
                 lastPlayer1Velocity = Player1.GetComponent<Rigidbody>().velocity;
                 lastPlayer2Velocity = Player2.GetComponent<Rigidbody>().velocity;
                 lastPlayer1Position = Player1.transform.position;
@@ -217,6 +223,7 @@ public class GameState : MonoBehaviour {
         {
             ItemBlocks[i].GetComponent<MeshRenderer>().enabled = true;
             ItemBlocks[i].GetComponent<BoxCollider>().enabled = true;
+            ItemBlocks[i].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
 
