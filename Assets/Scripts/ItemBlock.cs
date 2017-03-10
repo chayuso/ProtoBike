@@ -21,6 +21,8 @@ public class ItemBlock : MonoBehaviour {
 		powerList.Add ("Hookshot");
 		powerList.Add ("Trap");
 		powerList.Add ("Projectile");
+		powerList.Add ("Spin");
+
 	}
 	
 	// Update is called once per frame
@@ -32,7 +34,7 @@ public class ItemBlock : MonoBehaviour {
     {
         if (Player.gameObject.name == Player1.name)
         {
-			pManager.p1CurrentPower = powerList [UnityEngine.Random.Range (1, 5)];
+			pManager.p1CurrentPower = powerList [UnityEngine.Random.Range (1, 6)];
 
 			gameObject.GetComponent<MeshRenderer> ().enabled = false;
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
@@ -40,7 +42,7 @@ public class ItemBlock : MonoBehaviour {
         }
         else if (Player.gameObject.name == Player2.name)
         {
-			pManager.p2CurrentPower = powerList [UnityEngine.Random.Range (1, 5)];
+			pManager.p2CurrentPower = powerList [UnityEngine.Random.Range (1, 6)];
 
 			gameObject.GetComponent<MeshRenderer> ().enabled = false;
 			gameObject.GetComponent<BoxCollider> ().enabled = false;

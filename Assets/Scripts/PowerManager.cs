@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class PowerManager : MonoBehaviour {
 	public GameObject PlayerMovement;
+
 	public bool boostP1 = false;
+	public bool startBoostP1 = false;
+	public bool hookshotP1 = false;
+	public bool trapP1 = false;
+	public bool spinP1 = false;
+	public bool projectileP1 = false;
+
 	public bool boostP2 = false;
+	public bool startBoostP2 = false;
+	public bool hookshotP2 = false;
+	public bool trapP2 = false;
+	public bool spinP2 = false;
+	public bool projectileP2 = false;
 
 	public float boostTimeP1 = 2.5f;
 	public float boostTimeP2 = 2.5f;
@@ -22,31 +34,68 @@ public class PowerManager : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		//Probably shold use a switch for the powers because
-		if (p1CurrentPower == "Boost") {
+		//Boost Controller P1
+		if (p1CurrentPower == "Boost")
 			boostP1 = true;
-		}
 
-		if (p2CurrentPower == "Boost") {
-			boostP2 = true;
-		}
-
-		if (boostP1 && boostTimeP1 > 0) {
+		if (boostP1 && startBoostP1 && boostTimeP1 > 0) {
 			boostTimeP1 -= Time.deltaTime;
 			pMovement.Player1Accel = defaultAccel + 0.25f;
 		} else {
 			boostP1 = false;
+			startBoostP1 = false;
 			boostTimeP1 = 2.5f;
 			pMovement.Player1Accel = defaultAccel;
+			p1CurrentPower = "None";
 		}
+
+		//Hookshot Controller P1
+		if (p1CurrentPower == "Hookshot")
+			hookshotP1 = true;
+
+		//Trap Controller P1
+		if (p1CurrentPower == "Trap")
+			trapP1 = true;
 		
-		if (boostP2 && boostTimeP2 > 0) {
+		//Spin Controller P1
+		if (p1CurrentPower == "Spin")
+			spinP1 = true;
+
+		//Projectile Controller P1
+		if (p1CurrentPower == "Projectile")
+			projectileP1 = true;
+
+/***************************************************************/
+
+		//Boost Controller P2
+		if (p2CurrentPower == "Boost") {
+			boostP2 = true;
+		}
+			
+		if (startBoostP2 && boostTimeP2 > 0) {
 			boostTimeP2 -= Time.deltaTime;
 			pMovement.Player2Accel = defaultAccel + 0.25f;
 		} else {
-			boostP2 = false;
+			startBoostP2 = false;
 			boostTimeP2 = 2.5f;
 			pMovement.Player2Accel = defaultAccel;
 		}
+
+		//Hookshot Controller P2
+		if (p2CurrentPower == "Hookshot")
+			hookshotP2 = true;
+
+		//Trap Controller P2
+		if (p2CurrentPower == "Trap")
+			trapP2 = true;
+
+		//Spin Controller P2
+		if (p2CurrentPower == "Spin")
+			spinP2 = true;
+
+		//Projectile Controller P1
+		if (p2CurrentPower == "Projectile")
+			projectileP2 = true;
+
 	}
 }

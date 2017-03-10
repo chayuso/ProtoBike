@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour {
+	public GameObject PowerManager;
 
     public GameObject Player1;
     public GameObject Player2;
@@ -66,6 +67,8 @@ public class PlayerMovementController : MonoBehaviour {
     public float joystick_turn_modifier = 2.5f;
     public float joystick_acceleration_modifier = 1.005f;
     public float brake_modifier = 2;
+
+
     private Rigidbody P1RB;
 	private Rigidbody P2RB;
 
@@ -75,12 +78,16 @@ public class PlayerMovementController : MonoBehaviour {
     private string test1;
     private string test2;
 
+	private PowerManager pManager;
+
     // Use this for initialization
     void Start () {
         P1RB = Player1.GetComponent<Rigidbody>();
         P2RB = Player2.GetComponent<Rigidbody>();
         P1RB.freezeRotation = true;
         P2RB.freezeRotation = true;
+
+		pManager = PowerManager.GetComponent<PowerManager> ();
     }
     void Update()
     {
@@ -127,6 +134,7 @@ public class PlayerMovementController : MonoBehaviour {
         xbox_start2 = Input.GetButtonDown("Xbox2Start");
 
     }
+
     public void WheelAnimationControls()
     {
         if (xbox_a1 || xbox_taxis1 < 0 || Input.GetKey(KeyCode.W))
@@ -151,13 +159,27 @@ public class PlayerMovementController : MonoBehaviour {
 	public void Controls () {
         //################################################################
         //item activations
-        if (xbox_x1 || Input.GetKeyDown(KeyCode.E))
+		if (xbox_x1 || Input.GetKeyDown(KeyCode.E))
         {
-            ASM1.SetTrigger("Spin");
-        }
-        if (xbox_rb1 || Input.GetKeyDown(KeyCode.R))
-        {
-            HookShot1.SetTrigger("ActivateHook");
+			if (pManager.spinP1) {
+				ASM1.SetTrigger ("Spin");
+				pManager.spinP1 = false;
+				pManager.p1CurrentPower = "None";
+			} else if (pManager.hookshotP1) {
+				HookShot1.SetTrigger ("ActivateHook");
+				pManager.hookshotP1 = false;
+				pManager.p1CurrentPower = "None";
+			} else if (pManager.boostP1) {
+				pManager.boostP1 = false;
+				pManager.startBoostP1 = true;
+				pManager.p1CurrentPower = "None";
+			} else if (pManager.projectileP1) {
+				pManager.projectileP1 = false;
+				pManager.p1CurrentPower = "None";
+			} else if (pManager.trapP1) {
+				pManager.trapP1 = false;
+				pManager.p1CurrentPower = "None";
+			}
         }
         //################################################################
         //Accelerate
@@ -213,14 +235,28 @@ public class PlayerMovementController : MonoBehaviour {
         //Player2
         //=======================================================================================
         //item activations
-        if (xbox_x2 || Input.GetKeyDown(KeyCode.RightControl))
+		if (xbox_x2 || Input.GetKeyDown(KeyCode.RightShift))
         {
-            ASM2.SetTrigger("Spin");
-        }
-        if (xbox_rb2 || Input.GetKeyDown(KeyCode.RightShift))
-        {
-            HookShot2.SetTrigger("ActivateHook");
-        }
+			if (pManager.spinP2) {
+				ASM2.SetTrigger ("Spin");
+				pManager.spinP2 = false;
+				pManager.p2CurrentPower = "None";
+			} else if (pManager.hookshotP2) {
+				HookShot2.SetTrigger ("ActivateHook");
+				pManager.hookshotP2 = false;
+				pManager.p2CurrentPower = "None";
+			} else if (pManager.boostP2) {
+				pManager.boostP2 = false;
+				pManager.startBoostP2 = true;
+				pManager.p2CurrentPower = "None";
+			} else if (pManager.projectileP2) {
+				pManager.projectileP2 = false;
+				pManager.p2CurrentPower = "None";
+			} else if (pManager.trapP2) {
+				pManager.trapP2 = false;
+				pManager.p2CurrentPower = "None";
+			}
+		}
         //################################################################
         //Accelerate
         if (xbox_a2 || Input.GetKey(KeyCode.UpArrow))
