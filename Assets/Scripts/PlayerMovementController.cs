@@ -89,7 +89,7 @@ public class PlayerMovementController : MonoBehaviour {
 
 		pManager = PowerManager.GetComponent<PowerManager> ();
     }
-    void Update()
+    void FixedUpdate()
     {
         WheelAnimationControls();
         ASM1.SetBool("Left", left1);
@@ -175,6 +175,7 @@ public class PlayerMovementController : MonoBehaviour {
 				pManager.p1CurrentPower = "None";
 			} else if (pManager.projectileP1) {
 				pManager.projectileP1 = false;
+				pManager.shootProjectileP1 = true;
 				pManager.p1CurrentPower = "None";
 			} else if (pManager.trapP1) {
 				pManager.trapP1 = false;
@@ -186,6 +187,7 @@ public class PlayerMovementController : MonoBehaviour {
         if (xbox_a1 || Input.GetKey(KeyCode.W))
         {
 			P1RB.AddRelativeForce(transform.forward * Player1Accel, ForceMode.Impulse);
+
         }
         else if (xbox_taxis1 < 0)
         {
@@ -251,6 +253,7 @@ public class PlayerMovementController : MonoBehaviour {
 				pManager.p2CurrentPower = "None";
 			} else if (pManager.projectileP2) {
 				pManager.projectileP2 = false;
+				pManager.shootProjectileP2 = true;
 				pManager.p2CurrentPower = "None";
 			} else if (pManager.trapP2) {
 				pManager.trapP2 = false;

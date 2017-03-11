@@ -75,7 +75,7 @@ public class GameState : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (PauseGame)
         {
             PowerManager.GetComponent<PowerManager>().boostTimeP1 = lastP1ClockTime;

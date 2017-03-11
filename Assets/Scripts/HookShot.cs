@@ -16,14 +16,9 @@ public class HookShot : MonoBehaviour {
 
     bool hooked1 = false;
     bool hooked2 = false;
-
-    // Use this for initialization
-    void Start () {
-		
-	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (GameState.GetComponent<GameState>().reset)
         {
             hooked1 = false;

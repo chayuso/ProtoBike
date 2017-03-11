@@ -42,7 +42,7 @@ public class Joystick1Test : MonoBehaviour {
                 hAxis, vAxis);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         hAxis = Input.GetAxis("Xbox1LeftStickHorizontal");
         vAxis = Input.GetAxis("Xbox1LeftStickVertical");
