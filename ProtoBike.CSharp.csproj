@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\PowerManager.cs" />
     <Compile Include="Assets\Scripts\RestartButton.cs" />
     <Compile Include="Assets\Scripts\ResumeButton.cs" />
+    <Compile Include="Assets\Scripts\SpinOut.cs" />
     <Compile Include="Assets\Scripts\StartButton.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\Scripts\detectWinner.cs" />

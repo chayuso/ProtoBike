@@ -35,6 +35,7 @@ public class PowerManager : MonoBehaviour {
 	}
 
     void FixedUpdate () {
+        p1CurrentPower = "Spin";
         //Boost Controller P1
         if (p1CurrentPower == "Boost")
         {
