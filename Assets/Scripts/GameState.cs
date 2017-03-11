@@ -54,6 +54,8 @@ public class GameState : MonoBehaviour {
     public Vector3 lastPlayer1Position;
     public Vector3 lastPlayer2Position;
 
+    public bool reset = false;
+
     private float lastP1ClockTime;
     private float lastP2ClockTime;
     // Use this for initialization
@@ -100,6 +102,7 @@ public class GameState : MonoBehaviour {
         }
         else if (StartGame)
         {
+            reset = false;
             if (RedWinner)
             {
                 WinnerText.text = "Player1 Wins!";
@@ -114,7 +117,6 @@ public class GameState : MonoBehaviour {
             EscButtonText.enabled = true;
             TimeRemainingText.enabled = true;
             TimeRemainingText.text = "Time Remaining: " + globalClock.ToString();
-			print (TimeRemainingText);
             if (Input.GetButtonDown("Xbox1Start") || Input.GetButtonDown("Xbox2Start") || Input.GetKeyDown(KeyCode.Escape))
             {
                 lastP1ClockTime = PowerManager.GetComponent<PowerManager>().boostTimeP1;
@@ -184,6 +186,7 @@ public class GameState : MonoBehaviour {
 
     public void ResetVariables()
     {
+        reset = true;
         RedWinner = false;
         BlueWinner = false;
         NoWinner = false;

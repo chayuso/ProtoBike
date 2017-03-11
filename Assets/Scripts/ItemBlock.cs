@@ -34,15 +34,16 @@ public class ItemBlock : MonoBehaviour {
     {
         if (Player.gameObject.name == Player1.name)
         {
-			pManager.p1CurrentPower = powerList [UnityEngine.Random.Range (1, 6)];
+            pManager.p1CurrentPower = powerList [UnityEngine.Random.Range (1, 6)];
 
-			gameObject.GetComponent<MeshRenderer> ().enabled = false;
+
+            gameObject.GetComponent<MeshRenderer> ().enabled = false;
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
         else if (Player.gameObject.name == Player2.name)
         {
-			pManager.p2CurrentPower = powerList [UnityEngine.Random.Range (1, 6)];
+            pManager.p2CurrentPower = powerList [UnityEngine.Random.Range (1, 6)];
 
 			gameObject.GetComponent<MeshRenderer> ().enabled = false;
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
