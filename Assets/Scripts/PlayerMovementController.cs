@@ -68,6 +68,9 @@ public class PlayerMovementController : MonoBehaviour {
     public float joystick_acceleration_modifier = 1.005f;
     public float brake_modifier = 2;
 
+	public bool lockP1Movement = false;
+	public bool lockP2Movement = false;
+
 
     private Rigidbody P1RB;
 	private Rigidbody P2RB;
@@ -184,52 +187,52 @@ public class PlayerMovementController : MonoBehaviour {
         }
         //################################################################
         //Accelerate
-        if (xbox_a1 || Input.GetKey(KeyCode.W))
+		if (xbox_a1 || Input.GetKey(KeyCode.W) && !lockP1Movement)
         {
 			P1RB.AddRelativeForce(transform.forward * Player1Accel, ForceMode.Impulse);
 
         }
-        else if (xbox_taxis1 < 0)
+		else if (xbox_taxis1 < 0  && !lockP1Movement)
         {
             P1RB.AddRelativeForce(transform.forward * Player1Accel * ((-Input.GetAxis("Xbox1Trigger") * joystick_acceleration_modifier)), ForceMode.Impulse);
         }
         //################################################################
         //LeftTurn 
-        if (xbox_hAxis1 < 0)
+		if (xbox_hAxis1 < 0  && !lockP1Movement)
         {
             Player1.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox1LeftStickHorizontal")* joystick_turn_modifier, 0));
         }
-        else if (Input.GetKey(KeyCode.A))
+		else if (Input.GetKey(KeyCode.A) && !lockP1Movement)
         {
             Player1.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
 
-        if (xbox_hAxis1 < 0||(Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)))
+		if (xbox_hAxis1 < 0||(Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) && !lockP1Movement)
         { left1 = true; }
         else
         { left1 = false; }
         //##################################################################
         //RightTurn
-        if (xbox_hAxis1 > 0)
+		if (xbox_hAxis1 > 0  && !lockP1Movement)
         {
             Player1.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox1LeftStickHorizontal")* joystick_turn_modifier, 0));
         }
-        else if (Input.GetKey(KeyCode.D))
+		else if (Input.GetKey(KeyCode.D)  && !lockP1Movement)
         {
             Player1.transform.Rotate(new Vector3(0, rotateSpeed, 0));
         }
 
-        if (xbox_hAxis1 > 0 || (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)))
+		if (xbox_hAxis1 > 0 || (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) && !lockP1Movement)
         { right1 = true; }
         else
         { right1 = false; }
         //#################################################################
         //Reverse/Brake
-        if (xbox_b1 || Input.GetKey(KeyCode.S))
+		if (xbox_b1 || Input.GetKey(KeyCode.S) && !lockP1Movement)
         {
             P1RB.AddRelativeForce(-transform.forward * Player1Accel * brake_modifier, ForceMode.Impulse);
         }
-        else if (xbox_taxis1 > 0)
+		else if (xbox_taxis1 > 0  && !lockP1Movement)
         {
             P1RB.AddRelativeForce(-transform.forward * Player1Accel * (Input.GetAxis("Xbox1Trigger")*joystick_acceleration_modifier)* brake_modifier, ForceMode.Impulse);
         }
@@ -237,6 +240,7 @@ public class PlayerMovementController : MonoBehaviour {
         //Player2
         //=======================================================================================
         //item activations
+
 		if (xbox_x2 || Input.GetKeyDown(KeyCode.RightShift))
         {
 			if (pManager.spinP2) {
@@ -262,51 +266,51 @@ public class PlayerMovementController : MonoBehaviour {
 		}
         //################################################################
         //Accelerate
-        if (xbox_a2 || Input.GetKey(KeyCode.UpArrow))
+		if (xbox_a2 || Input.GetKey(KeyCode.UpArrow) && !lockP2Movement)
         {
             P2RB.AddRelativeForce(transform.forward * Player2Accel, ForceMode.Impulse);
         }
-        else if (xbox_taxis2 < 0)
+		else if (xbox_taxis2 < 0  && !lockP2Movement)
         {
             P2RB.AddRelativeForce(transform.forward * Player2Accel * ((-Input.GetAxis("Xbox2Trigger")) * joystick_acceleration_modifier), ForceMode.Impulse);
         }
         //################################################################
         //LeftTurn 
-        if (xbox_hAxis2 < 0)
+		if (xbox_hAxis2 < 0  && !lockP2Movement)
         {
             Player2.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox2LeftStickHorizontal")* joystick_turn_modifier, 0));
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+		else if (Input.GetKey(KeyCode.LeftArrow)  && !lockP2Movement)
         {
             Player2.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
 
-        if (xbox_hAxis2 < 0 || (Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)))
+		if (xbox_hAxis2 < 0 || (Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))  && !lockP2Movement)
         { left2 = true; }
         else
         { left2 = false; }
         //##################################################################
         //RightTurn
-        if (xbox_hAxis2 > 0)
+		if (xbox_hAxis2 > 0  && !lockP2Movement)
         {
             Player2.transform.Rotate(new Vector3(0, Input.GetAxis("Xbox2LeftStickHorizontal")*joystick_turn_modifier, 0));
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+		else if (Input.GetKey(KeyCode.RightArrow)  && !lockP2Movement)
         {
             Player2.transform.Rotate(new Vector3(0, rotateSpeed, 0));
         }
 
-        if (xbox_hAxis2 > 0 || (Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow)))
+		if (xbox_hAxis2 > 0 || (Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))  && !lockP2Movement)
         { right2 = true; }
         else
         { right2 = false; }
         //#################################################################
         //Reverse/Brake
-        if (xbox_b2 || Input.GetKey(KeyCode.DownArrow))
+		if (xbox_b2 || Input.GetKey(KeyCode.DownArrow)  && !lockP2Movement)
         {
             P2RB.AddRelativeForce(-transform.forward * Player2Accel*brake_modifier, ForceMode.Impulse);
         }
-        else if (xbox_taxis2 > 0)
+		else if (xbox_taxis2 > 0  && !lockP2Movement)
         {
             P2RB.AddRelativeForce(-transform.forward * Player2Accel * (Input.GetAxis("Xbox2Trigger") * joystick_acceleration_modifier)* brake_modifier, ForceMode.Impulse);
         }

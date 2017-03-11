@@ -111,7 +111,7 @@ public class PowerManager : MonoBehaviour {
 		//Projectile Controller P2
 		if (p2CurrentPower == "Projectile")
 			projectileP2 = true;
-		if (shootProjectileP1) {
+		if (shootProjectileP2) {
 			shootProjectile(projectileSpawn1P2, projectileSpawn2P2);
 			shootProjectileP2 = false;
 		}
