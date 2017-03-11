@@ -11,6 +11,7 @@ public class PowerManager : MonoBehaviour {
 	public bool trapP1 = false;
 	public bool spinP1 = false;
 	public bool projectileP1 = false;
+	public bool shootProjectileP1 = false;
 
 	public bool boostP2 = false;
 	public bool startBoostP2 = false;
@@ -18,12 +19,19 @@ public class PowerManager : MonoBehaviour {
 	public bool trapP2 = false;
 	public bool spinP2 = false;
 	public bool projectileP2 = false;
+	public bool shootProjectileP2 = false;
 
 	public float boostTimeP1 = 2.5f;
 	public float boostTimeP2 = 2.5f;
 
 	public string p1CurrentPower = "None";
 	public string p2CurrentPower = "None";
+
+	public GameObject projectilePrefab;
+	public GameObject projectileSpawn1P1;
+	public GameObject projectileSpawn2P1;
+	public GameObject projectileSpawn1P2;
+	public GameObject projectileSpawn2P2;
 
 	private float defaultAccel; 
 
@@ -37,14 +45,12 @@ public class PowerManager : MonoBehaviour {
     void FixedUpdate () {
         //Boost Controller P1
         if (p1CurrentPower == "Boost")
-        {
             boostP1 = true;
-        }
 
         if (startBoostP1 && boostTimeP1 > 0)
         {
             boostTimeP1 -= Time.deltaTime;
-            pMovement.Player1Accel = defaultAccel + 0.25f;
+			pMovement.Player1Accel = defaultAccel + (defaultAccel/2);
         }
         else
         {
@@ -68,6 +74,10 @@ public class PowerManager : MonoBehaviour {
 		//Projectile Controller P1
 		if (p1CurrentPower == "Projectile")
 			projectileP1 = true;
+		if (shootProjectileP1) {
+			shootProjectile(projectileSpawn1P1, projectileSpawn2P1);
+			shootProjectileP1 = false;
+		}
 
 /***************************************************************/
 
@@ -97,9 +107,35 @@ public class PowerManager : MonoBehaviour {
 		if (p2CurrentPower == "Spin")
 			spinP2 = true;
 
-		//Projectile Controller P1
+		//Projectile Controller P2
 		if (p2CurrentPower == "Projectile")
 			projectileP2 = true;
+		if (shootProjectileP1) {
+			shootProjectile(projectileSpawn1P2, projectileSpawn2P2);
+			shootProjectileP2 = false;
+		}
+
+	}
+
+	void shootProjectile(GameObject spawn1, GameObject spawn2) {
+
+		var projectile1 = (GameObject)Instantiate(
+			projectilePrefab,
+			spawn1.transform.position,
+			spawn1.transform.rotation);
+
+		projectile1.GetComponent<Rigidbody>().velocity = projectile1.transform.forward * 100;
+
+		Destroy(projectile1, 3.0f);
+
+		var projectile2 = (GameObject)Instantiate(
+			projectilePrefab,
+			spawn2.transform.position,
+			spawn2.transform.rotation);
+
+		projectile2.GetComponent<Rigidbody>().velocity = projectile2.transform.forward * 100;
+
+		Destroy(projectile2, 3.0f);
 
 	}
 }
