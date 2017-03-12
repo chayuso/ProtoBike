@@ -166,9 +166,6 @@ public class PlayerMovementController : MonoBehaviour {
 	public void Controls () {
         //################################################################
         //item activations
-		if(Input.GetKeyDown(KeyCode.Q)){
-			pManager.shootProjectileP1 = true;
-		}
 
 		if (xbox_x1 || Input.GetKeyDown(KeyCode.E))
         {
@@ -190,6 +187,7 @@ public class PlayerMovementController : MonoBehaviour {
 				pManager.p1CurrentPower = "None";
 			} else if (pManager.trapP1) {
 				pManager.trapP1 = false;
+				pManager.spawnTrapP1 = true;
 				pManager.p1CurrentPower = "None";
 			}
         }
@@ -269,6 +267,7 @@ public class PlayerMovementController : MonoBehaviour {
 				pManager.p2CurrentPower = "None";
 			} else if (pManager.trapP2) {
 				pManager.trapP2 = false;
+				pManager.spawnTrapP2 = true;
 				pManager.p2CurrentPower = "None";
 			}
 		}

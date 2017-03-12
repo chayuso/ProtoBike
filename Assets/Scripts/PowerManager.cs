@@ -9,6 +9,7 @@ public class PowerManager : MonoBehaviour {
 	public bool startBoostP1 = false;
 	public bool hookshotP1 = false;
 	public bool trapP1 = false;
+	public bool spawnTrapP1 = false;
 	public bool spinP1 = false;
 	public bool projectileP1 = false;
 	public bool shootProjectileP1 = false;
@@ -17,6 +18,7 @@ public class PowerManager : MonoBehaviour {
 	public bool startBoostP2 = false;
 	public bool hookshotP2 = false;
 	public bool trapP2 = false;
+	public bool spawnTrapP2 = false;
 	public bool spinP2 = false;
 	public bool projectileP2 = false;
 	public bool shootProjectileP2 = false;
@@ -32,6 +34,10 @@ public class PowerManager : MonoBehaviour {
 	public GameObject projectileSpawn2P1;
 	public GameObject projectileSpawn1P2;
 	public GameObject projectileSpawn2P2;
+
+	public GameObject trapPrefab;
+	public GameObject trapSpawnP1;
+	public GameObject trapSpawnP2;
 
 	private float defaultAccel; 
 
@@ -66,6 +72,10 @@ public class PowerManager : MonoBehaviour {
 		//Trap Controller P1
 		if (p1CurrentPower == "Trap")
 			trapP1 = true;
+		if (spawnTrapP1 == true) {
+			spawnTrap (trapSpawnP1);
+			spawnTrapP1 = false;
+		}
 		
 		//Spin Controller P1
 		if (p1CurrentPower == "Spin")
@@ -102,6 +112,10 @@ public class PowerManager : MonoBehaviour {
 		//Trap Controller P2
 		if (p2CurrentPower == "Trap")
 			trapP2 = true;
+		if (spawnTrapP2) {
+			spawnTrap (trapSpawnP2);
+			spawnTrapP2 = false;
+		}
 
 		//Spin Controller P2
 		if (p2CurrentPower == "Spin")
@@ -136,6 +150,14 @@ public class PowerManager : MonoBehaviour {
 		projectile2.GetComponent<Rigidbody>().velocity = projectile2.transform.forward * 50;
 
 		Destroy(projectile2, 2.0f);
+	}
 
+	void spawnTrap(GameObject trapSpawn){
+		var trap = (GameObject)Instantiate (
+			trapPrefab,
+			trapSpawn.transform.position,
+			trapSpawn.transform.rotation);
+
+		Destroy (trap, 10.0f);
 	}
 }
