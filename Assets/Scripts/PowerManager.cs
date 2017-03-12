@@ -124,18 +124,18 @@ public class PowerManager : MonoBehaviour {
 			spawn1.transform.position,
 			spawn1.transform.rotation);
 
-		projectile1.GetComponent<Rigidbody>().velocity = projectile1.transform.forward * 100;
+		projectile1.GetComponent<Rigidbody>().velocity = projectile1.transform.forward * 50;
 
-		Destroy(projectile1, 3.0f);
+		Destroy(projectile1, 2.0f);
 
 		var projectile2 = (GameObject)Instantiate(
 			projectilePrefab,
 			spawn2.transform.position,
 			spawn2.transform.rotation);
 
-		projectile2.GetComponent<Rigidbody>().velocity = projectile2.transform.forward * 100;
+		projectile2.GetComponent<Rigidbody>().velocity = projectile2.transform.forward * 50;
 
-		Destroy(projectile2, 3.0f);
+		Destroy(projectile2, 2.0f);
 
 	}
 }

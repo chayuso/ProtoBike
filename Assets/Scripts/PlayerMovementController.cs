@@ -136,6 +136,10 @@ public class PlayerMovementController : MonoBehaviour {
         xbox_back2 = Input.GetButtonDown("Xbox2Back");
         xbox_start2 = Input.GetButtonDown("Xbox2Start");
 
+		if (lockP1Movement)
+			StartCoroutine (lockPlayer1 ());
+		if (lockP2Movement)
+			StartCoroutine (lockPlayer2 ());
     }
 
     public void WheelAnimationControls()
@@ -162,6 +166,10 @@ public class PlayerMovementController : MonoBehaviour {
 	public void Controls () {
         //################################################################
         //item activations
+		if(Input.GetKeyDown(KeyCode.Q)){
+			pManager.shootProjectileP1 = true;
+		}
+
 		if (xbox_x1 || Input.GetKeyDown(KeyCode.E))
         {
 			if (pManager.spinP1) {
@@ -316,4 +324,14 @@ public class PlayerMovementController : MonoBehaviour {
         }
         //#################################################################
     }
+
+	private IEnumerator lockPlayer1(){
+		yield return new WaitForSeconds (2.0f);
+		lockP1Movement = false;
+	}
+
+	private IEnumerator lockPlayer2(){
+		yield return new WaitForSeconds (2.0f);
+		lockP2Movement = false;
+	}
 }

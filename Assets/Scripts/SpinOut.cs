@@ -20,20 +20,20 @@ public class SpinOut : MonoBehaviour {
     }
     void OnCollisionEnter(Collision Player)
     {
-        print(Player.gameObject.name);
+        //print(Player.gameObject.name);
         if (!spunOut2 && Player.gameObject.name == "Player1" && ASM1.GetCurrentAnimatorStateInfo(0).IsName("Spin"))
         {
-            print("player2 spin");
+            //print("player2 spin");
             ASM2.SetTrigger("SpinOut");
             spunOut2 = true;
-            print("Done");
+            //print("Done");
         }
         else if(!spunOut1 && Player.gameObject.name == "Player2" && ASM2.GetCurrentAnimatorStateInfo(0).IsName("Spin"))
         {
-            print("player1 spin");
+            //print("player1 spin");
             ASM1.SetTrigger("SpinOut");
             spunOut1 = true;
-            print("Done");
+            //print("Done");
         }
     }
 }
