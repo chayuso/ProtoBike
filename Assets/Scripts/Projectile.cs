@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
-
-	private PlayerMovementController pMovement;
+    private SpinAnimation SpinOut;
+    //private PlayerMovementController pMovement;
 
 	void Start(){
-		pMovement = GameObject.Find("PlayerMovement").GetComponent<PlayerMovementController> ();
+        SpinOut = GameObject.Find("SpinOutController").GetComponent<SpinAnimation>();
+        //pMovement = GameObject.Find("PlayerMovement").GetComponent<PlayerMovementController> ();
 	}
 
 	void OnTriggerEnter(Collider col){
 		if (col.gameObject.name == "Player1") {
-			pMovement.lockP1Movement = true;
+            SpinOut.SpinPlayer1();
 		}
 		if (col.gameObject.name == "Player2") {
-			pMovement.lockP2Movement = true;
+            SpinOut.SpinPlayer2();
 		}
 	}
 }

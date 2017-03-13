@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Trap : MonoBehaviour {
-
-	private PlayerMovementController pMovement;
+    private SpinAnimation SpinOut;
+    private GameState GameState;
+	//private PlayerMovementController pMovement;
 
 	void Start(){
-		pMovement = GameObject.Find("PlayerMovement").GetComponent<PlayerMovementController> ();
+        SpinOut = GameObject.Find("SpinOutController").GetComponent<SpinAnimation>();
+        GameState = GameObject.Find("GameState").GetComponent<GameState> ();
+        //pMovement = GameObject.Find("PlayerMovement").GetComponent<PlayerMovementController> ();
 	}
-
+    void FixedUpdate()
+    {
+        if (GameState.GetComponent<GameState>().reset)
+        {
+            Destroy(gameObject);
+        }
+    }
 	void OnCollisionEnter(Collision col){
 		if (col.gameObject.name == "Player1") {
-			pMovement.lockP1Movement = true;
+            SpinOut.SpinPlayer1();
 			Destroy (gameObject);
 		}
 		if (col.gameObject.name == "Player2") {
-			pMovement.lockP2Movement = true;
-			Destroy (gameObject);
+            SpinOut.SpinPlayer2();
+            Destroy (gameObject);
 		}
 	}
 }

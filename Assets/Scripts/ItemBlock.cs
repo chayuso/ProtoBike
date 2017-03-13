@@ -12,10 +12,12 @@ public class ItemBlock : MonoBehaviour {
 
 	private List<string> powerList = new List<string>();
 	private PowerManager pManager;
+    private GameState GameState;
 
 	// Use this for initialization
 	void Start () {
-		pManager = PowerManager.GetComponent<PowerManager> ();
+        GameState = GameObject.Find("GameState").GetComponent<GameState>();
+        pManager = PowerManager.GetComponent<PowerManager> ();
 		powerList.Add ("None");
 		powerList.Add ("Boost");
 		powerList.Add ("Hookshot");
@@ -26,14 +28,26 @@ public class ItemBlock : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		transform.Rotate (new Vector3(15, 30, 45) * Time.deltaTime);
-	}
+        if (GameState.GetComponent<GameState>().reset)
+        {
+            GetComponent<MeshRenderer>().enabled = true;
+            GetComponent<BoxCollider>().enabled = true;
+            transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
+        }
+    }
 
     void OnTriggerEnter(Collider Player)
     {
         if (Player.gameObject.name == Player1.name)
         {
+            pManager.boostP1 = false;
+            pManager.hookshotP1 = false;
+            pManager.trapP1 = false;
+            pManager.spinP1 = false;
+            pManager.projectileP1 = false;
+
             pManager.p1CurrentPower = powerList [UnityEngine.Random.Range (1, 6)];
 
 
@@ -43,6 +57,12 @@ public class ItemBlock : MonoBehaviour {
         }
         else if (Player.gameObject.name == Player2.name)
         {
+            pManager.boostP2 = false;
+            pManager.hookshotP2 = false;
+            pManager.trapP2 = false;
+            pManager.spinP2 = false;
+            pManager.projectileP2 = false;
+
             pManager.p2CurrentPower = powerList [UnityEngine.Random.Range (1, 6)];
 
 			gameObject.GetComponent<MeshRenderer> ().enabled = false;
