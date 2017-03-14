@@ -110,11 +110,13 @@ public class GameState : MonoBehaviour {
         }
         else if (StartGame)
         {
+            reset = false;
+
 			if (playStartTimer) {
 				playStartTimer = false;
 				GetComponent<AudioSource> ().Play ();
 			}
-            reset = false;
+            
             if (RedWinner)
             {
                 WinnerText.text = "Player1 Wins!";
@@ -167,7 +169,8 @@ public class GameState : MonoBehaviour {
                     StartCoroutine(globalTimeCoroutine);
                     startedGlobalTimeCourtine = true;
                 }
-                if (globalClock<=totalTime-4)
+                
+                if (globalClock<=totalTime-1)
                 {
                     Controls.GetComponent<PlayerMovementController>().Controls();
                 }
@@ -216,7 +219,7 @@ public class GameState : MonoBehaviour {
         GameWon = false;    
         StartGame = false;
         PauseGame = false;
-
+        playStartTimer = true;
         PauseCamera.enabled = false;
         WinnerText.text = "";
         EscButtonText.enabled = false;
