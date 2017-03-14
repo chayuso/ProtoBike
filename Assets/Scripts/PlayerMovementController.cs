@@ -177,22 +177,27 @@ public class PlayerMovementController : MonoBehaviour {
 			if (pManager.spinP1) {
 				ASM1.SetTrigger ("Spin");
 				pManager.spinP1 = false;
+				audioControlP1.playSpin = true;
 				pManager.p1CurrentPower = "None";
 			} else if (pManager.hookshotP1) {
 				HookShot1.SetTrigger ("ActivateHook");
 				pManager.hookshotP1 = false;
+				audioControlP1.playHookshotFire = true;
 				pManager.p1CurrentPower = "None";
 			} else if (pManager.boostP1) {
 				pManager.boostP1 = false;
 				pManager.startBoostP1 = true;
+				audioControlP1.playBoost = true;
 				pManager.p1CurrentPower = "None";
 			} else if (pManager.projectileP1) {
 				pManager.projectileP1 = false;
 				pManager.shootProjectileP1 = true;
+				audioControlP1.playProjectile = true;
 				pManager.p1CurrentPower = "None";
 			} else if (pManager.trapP1) {
 				pManager.trapP1 = false;
 				pManager.spawnTrapP1 = true;
+				audioControlP1.playTrap = true;
 				pManager.p1CurrentPower = "None";
 			}
         }
@@ -276,22 +281,27 @@ public class PlayerMovementController : MonoBehaviour {
 			if (pManager.spinP2) {
 				ASM2.SetTrigger ("Spin");
 				pManager.spinP2 = false;
+				audioControlP2.playSpin = true;
 				pManager.p2CurrentPower = "None";
 			} else if (pManager.hookshotP2) {
 				HookShot2.SetTrigger ("ActivateHook");
 				pManager.hookshotP2 = false;
+				audioControlP2.playHookshotFire = true;
 				pManager.p2CurrentPower = "None";
 			} else if (pManager.boostP2) {
 				pManager.boostP2 = false;
 				pManager.startBoostP2 = true;
+				audioControlP2.playBoost = true;
 				pManager.p2CurrentPower = "None";
 			} else if (pManager.projectileP2) {
 				pManager.projectileP2 = false;
 				pManager.shootProjectileP2 = true;
+				audioControlP2.playProjectile = true;
 				pManager.p2CurrentPower = "None";
 			} else if (pManager.trapP2) {
 				pManager.trapP2 = false;
 				pManager.spawnTrapP2 = true;
+				audioControlP2.playTrap = true;
 				pManager.p2CurrentPower = "None";
 			}
 		}

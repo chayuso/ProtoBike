@@ -47,6 +47,7 @@ public class GameState : MonoBehaviour {
     public bool RedWinner = false;
     public bool BlueWinner = false;
     public bool NoWinner = false;
+	public bool playStartTimer = true;
 
     private IEnumerator globalTimeCoroutine;
     public Vector3 lastPlayer1Velocity;
@@ -102,6 +103,10 @@ public class GameState : MonoBehaviour {
         }
         else if (StartGame)
         {
+			if (playStartTimer) {
+				playStartTimer = false;
+				GetComponent<AudioSource> ().Play ();
+			}
             reset = false;
             if (RedWinner)
             {

@@ -53,6 +53,7 @@ public class SpinAnimation : MonoBehaviour {
         if (!animate1)
         {
             ASM1.SetTrigger("SpinOut");
+			Player1.GetComponent<audioScript> ().spinOut.Play ();
             spunOut1 = true;
             pMovement.lockP1Movement = true;
         }
@@ -63,6 +64,7 @@ public class SpinAnimation : MonoBehaviour {
         if (!animate2)
         {
             ASM2.SetTrigger("SpinOut");
+			Player1.GetComponent<audioScript> ().spinOut.Play ();
             animate2 = true;
             pMovement.lockP2Movement = true;
         }
