@@ -76,6 +76,7 @@
 -define:UNITY_EDITOR_64
 -define:UNITY_EDITOR_OSX
 -define:UNITY_TEAM_LICENSE
+'Assets/CountDown.cs'
 'Assets/Scripts/GameState.cs'
 'Assets/Scripts/HookShot.cs'
 'Assets/Scripts/ItemBlock.cs'

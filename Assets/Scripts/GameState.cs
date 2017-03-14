@@ -14,6 +14,8 @@ public class GameState : MonoBehaviour {
     public GameObject MenuButton;
     public GameObject RestartButton;
 
+	public GameObject CountDownText;
+
     public GameObject PowerManager;
 
     Vector3 startpos1;
@@ -59,6 +61,9 @@ public class GameState : MonoBehaviour {
 
     private float lastP1ClockTime;
     private float lastP2ClockTime;
+
+	private CountDown countDown;
+
     // Use this for initialization
     void Start () {
         TimeRemainingText.enabled = false;
@@ -73,6 +78,8 @@ public class GameState : MonoBehaviour {
         startpos2 = Player2.transform.position;
         startrot1 = Player1.transform.rotation;
         startrot2 = Player2.transform.rotation;
+
+		countDown = CountDownText.GetComponent<CountDown> ();
     }
 	
 	// Update is called once per frame
@@ -177,12 +184,13 @@ public class GameState : MonoBehaviour {
 
     void globalTimeDecay()
     {
-        globalClock += -(timeDecay);
+		if(countDown.countFinished)
+        	globalClock += -(timeDecay);
     }
 
     IEnumerator TimeLossRate()
     {
-        while (true)
+		while (true)
         {
             yield return new WaitForSeconds(1);
             globalTimeDecay();
