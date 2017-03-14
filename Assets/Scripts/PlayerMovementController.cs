@@ -71,6 +71,8 @@ public class PlayerMovementController : MonoBehaviour {
 	public bool lockP1Movement = false;
 	public bool lockP2Movement = false;
 
+	private audioScript audioControlP1;
+	private audioScript audioControlP2;
 
     private Rigidbody P1RB;
 	private Rigidbody P2RB;
@@ -91,6 +93,9 @@ public class PlayerMovementController : MonoBehaviour {
         P2RB.freezeRotation = true;
 
 		pManager = PowerManager.GetComponent<PowerManager> ();
+
+		audioControlP1 = Player1.GetComponent<audioScript> ();
+		audioControlP2 = Player2.GetComponent<audioScript> ();
     }
     void FixedUpdate()
     {
@@ -193,10 +198,19 @@ public class PlayerMovementController : MonoBehaviour {
         }
         //################################################################
         //Accelerate
+		if (Input.GetKeyDown (KeyCode.W) && !lockP1Movement) {
+			audioControlP1.notPlayAccel = false;
+			audioControlP1.playAccel = true;
+		}
+
+		if (Input.GetKeyUp (KeyCode.S) && !lockP1Movement) {
+			audioControlP1.notPlayBackUp = true;
+			audioControlP1.playBackUp = false;
+		}
+			
 		if (xbox_a1 || Input.GetKey(KeyCode.W) && !lockP1Movement)
         {
 			P1RB.AddRelativeForce(transform.forward * Player1Accel, ForceMode.Impulse);
-
         }
 		else if (xbox_taxis1 < 0  && !lockP1Movement)
         {
@@ -234,6 +248,16 @@ public class PlayerMovementController : MonoBehaviour {
         { right1 = false; }
         //#################################################################
         //Reverse/Brake
+		if (Input.GetKeyDown (KeyCode.S) && !lockP1Movement) {
+			audioControlP1.notPlayBackUp = false;
+			audioControlP1.playBackUp = true;
+		}
+			
+		if (Input.GetKeyUp (KeyCode.W) && !lockP1Movement) {
+			audioControlP1.notPlayAccel = true;
+			audioControlP1.playAccel = false;
+		}	
+
 		if (xbox_b1 || Input.GetKey(KeyCode.S) && !lockP1Movement)
         {
             P1RB.AddRelativeForce(-transform.forward * Player1Accel * brake_modifier, ForceMode.Impulse);
@@ -273,6 +297,16 @@ public class PlayerMovementController : MonoBehaviour {
 		}
         //################################################################
         //Accelerate
+		if (Input.GetKeyUp (KeyCode.DownArrow) && !lockP2Movement) {
+			audioControlP2.notPlayBackUp = true;
+			audioControlP2.playBackUp = false;
+		}
+
+		if (Input.GetKeyDown (KeyCode.UpArrow) && !lockP2Movement) {
+			audioControlP2.notPlayAccel = false;
+			audioControlP2.playAccel = true;
+		}
+
 		if (xbox_a2 || Input.GetKey(KeyCode.UpArrow) && !lockP2Movement)
         {
             P2RB.AddRelativeForce(transform.forward * Player2Accel, ForceMode.Impulse);
@@ -313,6 +347,16 @@ public class PlayerMovementController : MonoBehaviour {
         { right2 = false; }
         //#################################################################
         //Reverse/Brake
+		if (Input.GetKeyDown (KeyCode.DownArrow) && !lockP2Movement) {
+			audioControlP2.notPlayBackUp = false;
+			audioControlP2.playBackUp = true;
+		}
+
+		if (Input.GetKeyUp (KeyCode.UpArrow) && !lockP2Movement) {
+			audioControlP2.notPlayAccel = true;
+			audioControlP2.playAccel = false;
+		}
+
 		if (xbox_b2 || Input.GetKey(KeyCode.DownArrow)  && !lockP2Movement)
         {
             P2RB.AddRelativeForce(-transform.forward * Player2Accel*brake_modifier, ForceMode.Impulse);
