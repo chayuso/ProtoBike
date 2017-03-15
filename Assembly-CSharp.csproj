@@ -54,11 +54,13 @@
      <Compile Include="Assets\Scripts\Joystick1Test.cs" />
      <Compile Include="Assets\Scripts\MenuButton.cs" />
      <Compile Include="Assets\Scripts\OutOfBoundsController.cs" />
+     <Compile Include="Assets\Scripts\PlatformController.cs" />
      <Compile Include="Assets\Scripts\PlayerMovementController.cs" />
      <Compile Include="Assets\Scripts\PowerManager.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\RestartButton.cs" />
      <Compile Include="Assets\Scripts\ResumeButton.cs" />
+     <Compile Include="Assets\Scripts\SpawnController.cs" />
      <Compile Include="Assets\Scripts\SpinAnimation.cs" />
      <Compile Include="Assets\Scripts\SpinOut.cs" />
      <Compile Include="Assets\Scripts\StartButton.cs" />

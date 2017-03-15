@@ -101,7 +101,7 @@ public class GameState : MonoBehaviour {
 		//Debug.Log(mainMusic.timeSamples / (loopThreshold * mainMusicClip.frequency));
 		//Debug.Log(loopThreshold * mainMusicClip.frequency);
 		if (loopLength > 0 && loopThreshold > 0) {
-			if (mainMusic.timeSamples >= 2641000) {
+			if (mainMusic.timeSamples >= 2640000) {
 				//Debug.Log ("Reached end of song");
 				mainMusic.timeSamples -= Mathf.RoundToInt(loopLength * mainMusicClip.frequency);
 			}
