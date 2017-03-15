@@ -32,8 +32,10 @@ public class CountDown : MonoBehaviour {
 			StartCoroutine(Count(3));
 		}
 
-		if (gState.globalClock < gState.totalTime-1)
+		if (gState.globalClock < gState.totalTime - 1) {
 			text.enabled = false;
+			gState.startMusic = true;
+		}
 	}
     IEnumerator Count(int i)
     {

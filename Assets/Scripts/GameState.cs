@@ -50,6 +50,8 @@ public class GameState : MonoBehaviour {
     public bool BlueWinner = false;
     public bool NoWinner = false;
 	public bool playStartTimer = true;
+	public bool startMusic = false;
+	public bool notPlayingMusic = true;
 
     private IEnumerator globalTimeCoroutine;
     public Vector3 lastPlayer1Velocity;
@@ -58,6 +60,12 @@ public class GameState : MonoBehaviour {
     public Vector3 lastPlayer2Position;
 
     public bool reset = false;
+
+	private AudioSource countDownSound;
+	private AudioSource mainMusic;
+	private AudioClip mainMusicClip;
+	public float loopLength;
+	public float loopThreshold;
 
     private float lastP1ClockTime;
     private float lastP2ClockTime;
@@ -80,8 +88,26 @@ public class GameState : MonoBehaviour {
         startrot2 = Player2.transform.rotation;
 
 		countDown = CountDownText.GetComponent<CountDown> ();
+
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+
+		countDownSound = audioSources [0];
+		mainMusic = audioSources [1];
+		mainMusicClip = mainMusic.clip;
     }
-	
+
+	void Update() {
+		//Debug.Log(mainMusicClip.frequency);
+		//Debug.Log(mainMusic.timeSamples / (loopThreshold * mainMusicClip.frequency));
+		//Debug.Log(loopThreshold * mainMusicClip.frequency);
+		if (loopLength > 0 && loopThreshold > 0) {
+			if (mainMusic.timeSamples >= 2641000) {
+				//Debug.Log ("Reached end of song");
+				mainMusic.timeSamples -= Mathf.RoundToInt(loopLength * mainMusicClip.frequency);
+			}
+		}
+	}
+
 	// Update is called once per frame
 	void FixedUpdate () {
         if (PauseGame)
@@ -114,7 +140,13 @@ public class GameState : MonoBehaviour {
 
 			if (playStartTimer) {
 				playStartTimer = false;
-				GetComponent<AudioSource> ().Play ();
+				countDownSound.Play ();
+			}
+
+			if (startMusic && notPlayingMusic) {
+				startMusic = false;
+				notPlayingMusic = false;
+				mainMusic.Play ();
 			}
             
             if (RedWinner)
