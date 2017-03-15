@@ -8,7 +8,6 @@ public class HookShot : MonoBehaviour {
     public GameObject Player2;
     public Animator HookShot1;
     public Animator HookShot2;
-
     public float t;
 
     private Vector3 lastPlayer1Position;
@@ -59,10 +58,28 @@ public class HookShot : MonoBehaviour {
     }
     void OnTriggerEnter(Collider Player)
     {
-        
-        if (!hooked1 && Player.gameObject.name == Player1.name && HookShot2.GetCurrentAnimatorStateInfo(0).IsName("Extend"))
+        if (Player.gameObject.name == "Motorcycle")
         {
-            HookShot2.SetBool("Hook",true);
+            if (!hooked1 && Player.GetComponent<BikeNumber>().BikeNum == 1 && HookShot2.GetCurrentAnimatorStateInfo(0).IsName("Extend"))
+            {
+                HookShot2.SetBool("Hook", true);
+                lastPlayer1Position = Player1.transform.position;
+                lastPlayer2Position = Player2.transform.position;
+                hooked1 = true;
+                t = 0;
+            }
+            else if (!hooked2 && Player.GetComponent<BikeNumber>().BikeNum == 2 && HookShot1.GetCurrentAnimatorStateInfo(0).IsName("Extend"))
+            {
+                HookShot1.SetBool("Hook", true);
+                lastPlayer1Position = Player1.transform.position;
+                lastPlayer2Position = Player2.transform.position;
+                hooked2 = true;
+                t = 0;
+            }
+        }
+        else if (!hooked1 && Player.gameObject.name == Player1.name && HookShot2.GetCurrentAnimatorStateInfo(0).IsName("Extend"))
+        {
+            HookShot2.SetBool("Hook", true);
             lastPlayer1Position = Player1.transform.position;
             lastPlayer2Position = Player2.transform.position;
             hooked1 = true;

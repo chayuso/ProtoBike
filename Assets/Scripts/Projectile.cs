@@ -12,10 +12,21 @@ public class Projectile : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-		if (col.gameObject.name == "Player1") {
+        if (col.gameObject.name == "Motorcycle")
+        {
+            if (col.GetComponent<BikeNumber>().BikeNum == 1)
+            {
+                SpinOut.SpinPlayer1();
+            }
+            else if (col.GetComponent<BikeNumber>().BikeNum == 2)
+            {
+                SpinOut.SpinPlayer2();
+            }
+        }
+        else if (col.gameObject.name == "Player1") {
             SpinOut.SpinPlayer1();
 		}
-		if (col.gameObject.name == "Player2") {
+		else if (col.gameObject.name == "Player2") {
             SpinOut.SpinPlayer2();
 		}
 	}
