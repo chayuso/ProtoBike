@@ -100,12 +100,8 @@ public class GameState : MonoBehaviour {
     }
 
 	void Update() {
-		//Debug.Log(mainMusicClip.frequency);
-		//Debug.Log(mainMusic.timeSamples / (loopThreshold * mainMusicClip.frequency));
-		//Debug.Log(loopThreshold * mainMusicClip.frequency);
 		if (loopLength > 0 && loopThreshold > 0) {
 			if (mainMusic.timeSamples >= 2640000) {
-				//Debug.Log ("Reached end of song");
 				mainMusic.timeSamples -= Mathf.RoundToInt(loopLength * mainMusicClip.frequency);
 			}
 		}
@@ -119,6 +115,10 @@ public class GameState : MonoBehaviour {
             PowerManager.GetComponent<PowerManager>().boostTimeP2 = lastP2ClockTime;
             Player1.transform.position = lastPlayer1Position;
             Player2.transform.position = lastPlayer2Position;
+
+			mainMusic.Stop ();
+			notPlayingMusic = true;
+
             if (startedGlobalTimeCourtine) //If the Timer was started.
             {   //Stop the Countdown Timer if the game is Paused.
                 StopAllCoroutines();
@@ -248,6 +248,8 @@ public class GameState : MonoBehaviour {
         MenuCamera.enabled = true;
         Player1Camera.enabled = false;
         Player2Camera.enabled = false;
+
+		mainMusic.Stop ();
 
         globalClock = totalTime;
         StopAllCoroutines();

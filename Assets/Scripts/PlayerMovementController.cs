@@ -71,6 +71,11 @@ public class PlayerMovementController : MonoBehaviour {
 	public bool lockP1Movement = false;
 	public bool lockP2Movement = false;
 
+	public bool P1Accelerating = false;
+	public bool P2Accelerating = false;
+	public bool P1Reversing = false;
+	public bool P2Reversing = false;
+
 	private audioScript audioControlP1;
 	private audioScript audioControlP2;
 
@@ -203,6 +208,9 @@ public class PlayerMovementController : MonoBehaviour {
         }
         //################################################################
         //Accelerate
+		if (!Input.GetKey (KeyCode.W))
+			audioControlP1.notPlayAccel = true;
+
 		if (Input.GetKeyDown (KeyCode.W) && !lockP1Movement) {
 			audioControlP1.notPlayAccel = false;
 			audioControlP1.playAccel = true;
@@ -307,14 +315,17 @@ public class PlayerMovementController : MonoBehaviour {
 		}
         //################################################################
         //Accelerate
-		if (Input.GetKeyUp (KeyCode.DownArrow) && !lockP2Movement) {
-			audioControlP2.notPlayBackUp = true;
-			audioControlP2.playBackUp = false;
-		}
+		if (!Input.GetKey (KeyCode.UpArrow))
+			audioControlP2.notPlayAccel = true;
 
 		if (Input.GetKeyDown (KeyCode.UpArrow) && !lockP2Movement) {
 			audioControlP2.notPlayAccel = false;
 			audioControlP2.playAccel = true;
+		}
+
+		if (Input.GetKeyUp (KeyCode.DownArrow) && !lockP2Movement) {
+			audioControlP2.notPlayBackUp = true;
+			audioControlP2.playBackUp = false;
 		}
 
 		if (xbox_a2 || Input.GetKey(KeyCode.UpArrow) && !lockP2Movement)

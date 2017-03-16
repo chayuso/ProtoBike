@@ -65,12 +65,12 @@ public class audioScript : MonoBehaviour {
 		}
 		if (notPlayAccel) {
 			accelerate.Stop ();
-			brake.Play ();
 			notPlayAccel = false;
 		}
 
 		//Backing up sounds
 		if (playBackUp) {
+			brake.Play ();
 			backingUp.Play ();
 			playBackUp = false;
 		}
