@@ -250,6 +250,7 @@ public class GameState : MonoBehaviour {
         Player2Camera.enabled = false;
 
 		mainMusic.Stop ();
+		mainMusic.timeSamples = 0;
 
         globalClock = totalTime;
         StopAllCoroutines();
