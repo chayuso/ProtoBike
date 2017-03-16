@@ -21,6 +21,8 @@ public class CountDown : MonoBehaviour {
         if (gState.reset)
         {
             StopAllCoroutines();
+            gState.startMusic = false;
+            gState.notPlayingMusic = true;
             startCount = true;
             countFinished = false;
             text.text = "3";
