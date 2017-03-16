@@ -65,7 +65,6 @@
      <Compile Include="Assets\Scripts\SpinOut.cs" />
      <Compile Include="Assets\Scripts\StartButton.cs" />
      <Compile Include="Assets\Scripts\Trap.cs" />
-     <Compile Include="Assets\Scripts\UIController.cs" />
      <Compile Include="Assets\Scripts\audioScript.cs" />
      <Compile Include="Assets\Scripts\detectWinner.cs" />
  <Reference Include="UnityEngine.UI">

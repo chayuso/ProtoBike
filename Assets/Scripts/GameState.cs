@@ -59,6 +59,9 @@ public class GameState : MonoBehaviour {
     public Vector3 lastPlayer1Position;
     public Vector3 lastPlayer2Position;
 
+	public GameObject P1PowerBackground;
+	public GameObject P2PowerBackground;
+
     public bool reset = false;
 
 	private AudioSource countDownSound;
@@ -159,6 +162,8 @@ public class GameState : MonoBehaviour {
                 WinnerText.text = "Player2 Wins!";
                 WinnerText.color = Color.blue;
             }
+			P1PowerBackground.SetActive(true);
+			P2PowerBackground.SetActive(true);
             WinnerText.enabled = true;
             EscButtonText.enabled = true;
             TimeRemainingText.enabled = true;
