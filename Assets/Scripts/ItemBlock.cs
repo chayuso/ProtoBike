@@ -40,7 +40,8 @@ public class ItemBlock : MonoBehaviour {
 
     void OnTriggerEnter(Collider Player)
     {
-        if (Player.gameObject.name == Player1.name)
+        
+        if (Player.gameObject.name == Player1.name || (Player.gameObject.name == "Motorcycle" && Player.gameObject.transform.parent.gameObject.name == "Player1Bike"))
         {
             pManager.boostP1 = false;
             pManager.hookshotP1 = false;
@@ -55,7 +56,7 @@ public class ItemBlock : MonoBehaviour {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
-        else if (Player.gameObject.name == Player2.name)
+        else if (Player.gameObject.name == Player2.name || (Player.gameObject.name == "Motorcycle" && Player.gameObject.transform.parent.gameObject.name == "Player2Bike"))
         {
             pManager.boostP2 = false;
             pManager.hookshotP2 = false;

@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\BikeNumber.cs" />
     <Compile Include="Assets\Scripts\CountDown.cs" />
     <Compile Include="Assets\Scripts\GameState.cs" />
+    <Compile Include="Assets\Scripts\GifPlayer.cs" />
     <Compile Include="Assets\Scripts\HookShot.cs" />
     <Compile Include="Assets\Scripts\ItemBlock.cs" />
     <Compile Include="Assets\Scripts\Joystick1Test.cs" />
